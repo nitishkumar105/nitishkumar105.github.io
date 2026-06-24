@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import About from "../components/About";
 import Experience from "../components/Experience";
@@ -10,6 +10,7 @@ import Skills from "../components/Skills";
 import Certifications from "../components/Certifications";
 import Contact from "../components/Contact";
 import FloatingMascot from "../components/FloatingMascot";
+import Terminal from "../components/Terminal";
 import { Code2 } from "lucide-react";
 
 const Github = ({ size = 24 }: { size?: number }) => (
@@ -44,6 +45,40 @@ const item: Variants = {
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
+  const [cliOpen, setCliOpen] = useState(false);
+  const [inputBuffer, setInputBuffer] = useState("");
+
+  const SECRET_TRIGGER = "hire nitish";
+
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      // Don't capture typing in inputs or textareas
+      if (!cliOpen && (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+        return;
+      }
+
+      if (!cliOpen) {
+        const newBuffer = (inputBuffer + e.key).slice(-SECRET_TRIGGER.length).toLowerCase();
+        setInputBuffer(newBuffer);
+        
+        if (newBuffer === SECRET_TRIGGER) {
+          setCliOpen(true);
+          setInputBuffer("");
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, [inputBuffer, cliOpen]);
+
+  // Reset buffer after 2 seconds of inactivity
+  useEffect(() => {
+    if (inputBuffer.length > 0) {
+      const timeout = setTimeout(() => setInputBuffer(""), 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [inputBuffer]);
 
   const handleCopy = async () => {
     try {
@@ -158,14 +193,28 @@ export default function Home() {
                     SDE Intern @ Atomity GmbH · IIIT Bhagalpur
                   </motion.p>
 
-                  <motion.a
-                    variants={item}
-                    href="#about"
-                    className="mt-4 inline-flex items-center gap-3 rounded-full bg-blue-600 px-8 py-4 text-white font-bold shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-1 transition-all duration-300"
-                  >
-                    Explore My Work
-                    <span className="inline-block transform rotate-45 text-lg leading-none">↗</span>
-                  </motion.a>
+                  <motion.div variants={item} className="mt-4 flex flex-col items-center gap-4">
+                    <a
+                      href="#about"
+                      className="inline-flex items-center gap-3 rounded-full bg-blue-600 px-8 py-4 text-white font-bold shadow-lg shadow-blue-600/30 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/40 hover:-translate-y-1 transition-all duration-300"
+                    >
+                      Explore My Work
+                      <span className="inline-block transform rotate-45 text-lg leading-none">↗</span>
+                    </a>
+
+                    <div className="flex flex-col items-center gap-2">
+                      <button
+                        onClick={() => setCliOpen(true)}
+                        className="inline-flex items-center gap-2 rounded-full border border-zinc-400 px-8 py-4 text-zinc-900 font-mono font-medium hover:bg-zinc-900 hover:text-white transition-all duration-300"
+                      >
+                        {">"} <span className="animate-pulse">_</span> Start CLI Mode
+                      </button>
+
+                      <p className="text-xs text-zinc-400 font-mono">
+                        or just type 'hire nitish' anywhere on the page
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
 
               </motion.div>
@@ -181,6 +230,7 @@ export default function Home() {
           <Contact />
         </main>
         <FloatingMascot />
+        <Terminal isOpen={cliOpen} onClose={() => setCliOpen(false)} />
       </div>
     </AnimatePresence>
   );
