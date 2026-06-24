@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Nitish Kumar's GitHub Pages profile site." />
+    <title>Nitish Kumar</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4efe8;
+        --bg-2: #e8eef8;
+        --card: rgba(255, 255, 255, 0.72);
+        --text: #16202a;
+        --muted: #52606d;
+        --accent: #0f766e;
+        --accent-2: #1d4ed8;
+        --border: rgba(22, 32, 42, 0.12);
+        --shadow: 0 24px 80px rgba(15, 23, 42, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 34%),
+          radial-gradient(circle at top right, rgba(29, 78, 216, 0.14), transparent 30%),
+          linear-gradient(135deg, var(--bg), var(--bg-2));
+      }
+
+      .page {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px;
+      }
+
+      .card {
+        width: min(960px, 100%);
+        padding: 40px;
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        background: var(--card);
+        backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.1);
+        color: var(--accent);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      h1 {
+        margin: 18px 0 14px;
+        font-size: clamp(2.6rem, 7vw, 5.2rem);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+      }
+
+      .lead {
+        max-width: 52ch;
+        margin: 0 0 28px;
+        font-size: clamp(1.08rem, 2vw, 1.25rem);
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 26px;
+      }
+
+      .panel {
+        padding: 18px 20px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--muted);
+      }
+
+      a {
+        color: var(--accent-2);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+        margin-top: 26px;
+        color: var(--muted);
+      }
+
+      .links a {
+        font-weight: 700;
+      }
+
+      .footer {
+        margin-top: 30px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 720px) {
+        .card {
+          padding: 26px 20px;
+          border-radius: 22px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="card" aria-label="Nitish Kumar profile">
+        <div class="eyebrow">GitHub Pages ready</div>
+        <h1>Nitish Kumar</h1>
+        <p class="lead">Give me an SRS and I'll give you your software product.</p>
+
+        <div class="grid">
+          <div class="panel">
+            <span class="label">Email</span>
+            <a href="mailto:nitishkumaryadav105@gmail.com">nitishkumaryadav105@gmail.com</a>
+          </div>
+          <div class="panel">
+            <span class="label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/nitish-kumar-a8260924a/" target="_blank" rel="noreferrer">nitish-kumar</a>
+          </div>
+          <div class="panel">
+            <span class="label">LeetCode</span>
+            <a href="https://leetcode.com/u/nitishy07/" target="_blank" rel="noreferrer">nitishy07</a>
+          </div>
+          <div class="panel">
+            <span class="label">GitHub</span>
+            <a href="https://github.com/nitishkumar105" target="_blank" rel="noreferrer">nitishkumar105</a>
+          </div>
+        </div>
+
+        <div class="links">
+          <span>Profile view image:</span>
+          <a href="https://komarev.com/ghpvc/?username=nitishkumar105&color=blue" target="_blank" rel="noreferrer">Badge source</a>
+        </div>
+
+        <p class="footer">
+          After enabling GitHub Pages on this repository, your site will be available at
+          <strong>https://nitishkumar105.github.io</strong> if the repository name is exactly <strong>nitishkumar105.github.io</strong>.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
